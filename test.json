@@ -1,0 +1,178 @@
+{
+    "clientVersionFromXml": "0,9,1,2270610",
+    "gameMode": 7,
+    "clientVersionFromExe": "0,9,1,2270610",
+    "scenarioUiCategoryId": 0,
+    "mapDisplayName": "42_Neighbors",
+    "mapId": 25,
+    "weatherParams": {
+        "0": [
+            "PCOW003_Cloudy"
+        ],
+        "1": [
+            "PCOW003_Cloudy",
+            "PCOW006_Storm_Logic"
+        ]
+    },
+    "mapBorder": null,
+    "duration": 1200,
+    "gameLogic": "Domination",
+    "name": "12x12",
+    "scenario": "Domination",
+    "playerID": 0,
+    "vehicles": [
+        {
+            "shipId": 4183766832,
+            "relation": 2,
+            "id": 806495489,
+            "name": "BosDieMyner"
+        },
+        {
+            "shipId": 4183701200,
+            "relation": 2,
+            "id": 806707203,
+            "name": "steel_anvil"
+        },
+        {
+            "shipId": 4181669680,
+            "relation": 2,
+            "id": 940769541,
+            "name": "Pantherjaeger"
+        },
+        {
+            "shipId": 3762238928,
+            "relation": 1,
+            "id": 806380169,
+            "name": "techno_12"
+        },
+        {
+            "shipId": 4183701328,
+            "relation": 0,
+            "id": 806711692,
+            "name": "nima3333"
+        },
+        {
+            "shipId": 4288624336,
+            "relation": 2,
+            "id": 940778003,
+            "name": "ZRoronoaZ"
+        },
+        {
+            "shipId": 4182685520,
+            "relation": 2,
+            "id": 940911000,
+            "name": "dupe_guillaume_2017"
+        },
+        {
+            "shipId": 4182718288,
+            "relation": 2,
+            "id": 940737434,
+            "name": "FERDAMDUR_IS"
+        },
+        {
+            "shipId": 4182652624,
+            "relation": 1,
+            "id": 806560799,
+            "name": "Lehiorra"
+        },
+        {
+            "shipId": 4286494416,
+            "relation": 1,
+            "id": 806359712,
+            "name": "Breitner"
+        },
+        {
+            "shipId": 4288624336,
+            "relation": 1,
+            "id": 806536355,
+            "name": "TS_UZI"
+        },
+        {
+            "shipId": 4181604176,
+            "relation": 2,
+            "id": 940843179,
+            "name": "marinShadok"
+        },
+        {
+            "shipId": 4183766480,
+            "relation": 1,
+            "id": 806514619,
+            "name": "bziko_1"
+        },
+        {
+            "shipId": 4182652624,
+            "relation": 2,
+            "id": 940633150,
+            "name": "SMSbauchschuss"
+        },
+        {
+            "shipId": 4183799504,
+            "relation": 2,
+            "id": 940938179,
+            "name": "Jaime_Cort_s_G_mez"
+        },
+        {
+            "shipId": 4181604304,
+            "relation": 2,
+            "id": 806605008,
+            "name": "hreple"
+        },
+        {
+            "shipId": 4183799760,
+            "relation": 1,
+            "id": 940743763,
+            "name": "mcmatt"
+        },
+        {
+            "shipId": 4181604144,
+            "relation": 1,
+            "id": 940588765,
+            "name": "CapitanoAraym"
+        },
+        {
+            "shipId": 4181669680,
+            "relation": 1,
+            "id": 940549087,
+            "name": "Karybury"
+        },
+        {
+            "shipId": 3764303056,
+            "relation": 1,
+            "id": 940489954,
+            "name": "Sebakuz"
+        },
+        {
+            "shipId": 4284430032,
+            "relation": 1,
+            "id": 806515687,
+            "name": "haloatyou"
+        },
+        {
+            "shipId": 4183734224,
+            "relation": 2,
+            "id": 940474603,
+            "name": "horn28"
+        },
+        {
+            "shipId": 4182718256,
+            "relation": 2,
+            "id": 806506095,
+            "name": "MaxHH0502"
+        },
+        {
+            "shipId": 4076746448,
+            "relation": 1,
+            "id": 806405876,
+            "name": "tigeroxen"
+        }
+    ],
+    "playersPerTeam": 12,
+    "dateTime": "23.02.2020 20:47:07",
+    "mapName": "spaces/42_Neighbors",
+    "playerName": "nima3333",
+    "scenarioConfigId": 176,
+    "teamsCount": 2,
+    "logic": "Domination",
+    "playerVehicle": "PFSD106-Guepard",
+    "battleDuration": 1200
+}
