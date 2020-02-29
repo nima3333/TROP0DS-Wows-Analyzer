@@ -60,7 +60,7 @@ def get_html():
         r = requests.get(f'https://api.worldofwarships.eu/wows/account/statsbydate/?application_id={key}&account_id={name_dictionary[player[2]]}&fields=pvp.xp%2C+pvp.battles%2C+pvp.wins')
         result = json.loads(r.content.decode('utf-8'))
         if (result["meta"]["hidden"] is not None):        
-            text = f"{player[2]}     |   Hidden"
+            text = f"{player[2]} <br> Hidden"
             hidden = True
         else:
             raw_general_data = result["data"][str(name_dictionary[player[2]])]["pvp"]
@@ -73,8 +73,8 @@ def get_html():
         #shipname & artillery
         ship_name = ships_dictionary[player[0]]["name"]
         if ships_dictionary[player[0]]["default_profile"]["artillery"] is None:
-            text2 = f"{ship_name}     | CV  "
-            print(ships_dictionary[player[0]]["default_profile"])
+            #CV
+            text2 = f"{ship_name}"
         else:
             ship_caliber = ships_dictionary[player[0]]["default_profile"]["artillery"]["shells"]["AP"]["name"]
             matcher = re.match(r"^(\d{3})", ship_caliber)
@@ -83,7 +83,7 @@ def get_html():
             else:
                 actual_caliber = matcher.group(0)
                 if int(actual_caliber) > 380:
-                    text2 = f"{ship_name}     | AP : {actual_caliber}mm ❌"
+                    text2 = f"{ship_name}     | AP : {actual_caliber}mm  💀💀💀"
                 else:
                     text2 = f"{ship_name}     | AP : {actual_caliber}mm "
 
@@ -147,11 +147,10 @@ def get_html():
     for l in right:
         str_right += f"""
             <div class="row no-gutters">
-
-            <div class="col-md-9">
-                <div class="card {l[3]}">
-                <div class="card-body" style="padding: 10px">
-                    <div class="row card-text" style="padding: 0px">
+            <div class="col-md-9" style="position: relative">
+                <div class="card {l[3]}" style="width: inherit; height: -webkit-fill-available;">
+                <div class="card-body" style="padding-top:0px; padding-bottom:0px">
+                    <div class="row card-text" style="padding: 0px; ">
                         <div class="col" style="padding: 0px">
                             {l[0]}
                         </div>
@@ -162,9 +161,10 @@ def get_html():
                 </div> 
                 </div>
             </div>
-                        <div class="col-md-3">
-            <img src='{l[2]}' class="card-img" alt="..." style="width:150px; height: auto;">
+            <div class="col-md-2" style="padding-top: 10px; padding-bottom: 10px">
+                <img src='{l[2]}' class="card-img" alt="..." style="width:150px; height: auto; padding-left: 20px">
             </div>
+
             </div>
             """
     
