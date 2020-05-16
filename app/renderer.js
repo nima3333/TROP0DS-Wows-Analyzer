@@ -32,16 +32,14 @@ client.invoke("echo", "aaa", (error, res) => {
     document.body.innerHTML = res
   }
 })
-/** 
-formula.addEventListener('input', () => {
-  client.invoke("echo", formula.value, (error, res) => {
-    if(error) {
-      console.error(error)
-    } else {
-      result.textContent = res
-    }
-  })
-})
 
-formula.dispatchEvent(new Event('input'))
-*/
+let reload_button = document.querySelector('#reload')
+const {getCurrentWindow, globalShortcut} = require('electron').remote;
+
+var reload = ()=>{
+  getCurrentWindow().reload()
+}
+
+reload_button.addEventListener('click', () => {
+  reload()
+})

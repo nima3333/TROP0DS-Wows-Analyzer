@@ -2,6 +2,7 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
+const Menu = electron.Menu
 
 /*************************************************************
  * py process
@@ -66,8 +67,26 @@ app.on('will-quit', exitPyProc)
 
 let mainWindow = null
 
+function setMainMenu() {
+  const template = [
+    {
+      label: 'Filter',
+      submenu: [
+        {
+          label: 'Hello',
+          accelerator: 'Shift+CmdOrCtrl+H',
+          click() {
+              console.log('Oh, hi there!')
+          }
+        }
+      ]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
 const createWindow = () => {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 1200, height: 800})
   mainWindow.loadURL(require('url').format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
@@ -80,7 +99,12 @@ const createWindow = () => {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+  mainWindow = new BrowserWindow();
+  mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
+  setMainMenu();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

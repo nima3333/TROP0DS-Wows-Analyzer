@@ -18,7 +18,7 @@ class CalcApi(object):
                             </div>
                         </div>"""
             files = os.listdir(path)
-            if "test.json" not in files:
+            if "testd.json" not in files:
                 return f"""
                     <div class="jumbotron text-center" style="padding: 0">
                         <h1>Nima's Wows Analyser</h1>
@@ -27,6 +27,7 @@ class CalcApi(object):
                         <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
                         <span class="sr-only">Loading...</span>
                         </div>
+                        <button id="reload" type="button" class="btn btn-secondary">Secondary</button>
                     </div>"""
 
 
