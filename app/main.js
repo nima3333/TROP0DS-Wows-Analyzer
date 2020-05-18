@@ -3,6 +3,7 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const Menu = electron.Menu
+const { dialog } = require('electron')
 
 /*************************************************************
  * py process
@@ -73,7 +74,11 @@ const menuTemplate = [
       label: 'File',
       submenu: [
           {
-              label: 'Load API Key'
+              label: 'Load API Key',
+              click(){
+                a = dialog.showOpenDialog({ properties: ['openFile'] })
+                console.dir(a[0])
+              }
           },
           {
               label: 'Quit',
