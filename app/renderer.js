@@ -1,14 +1,9 @@
 const zerorpc = require("zerorpc")
 let client = new zerorpc.Client()
-console.log("here")
+console.log("renderer is here")
 client.connect("tcp://127.0.0.1:4242")
 
-
-let formula = document.querySelector('#formula')
-//let result = document.querySelector('#result')
-let result = document.body
-
-result.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
+document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
 <h1>Nima's Wows Analyser</h1>
 </div>
 <div>
@@ -17,29 +12,26 @@ result.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
 </div>
 </div>`
 
+let reload_button;
 window.onload = function() {
-  // all of your code goes in here
-  // it runs after the DOM is built
-}
-
-client.invoke("echo", "aaa", (error, res) => {
-  if(error) {
-    console.error(error)
-  } else {
-    var doc = new DOMParser().parseFromString(res, "text/xml");
-    console.dir(doc)
-    result
-    document.body.innerHTML = res
+  client.invoke("echo", "aaa", (error, res) => {
+    if(error) {
+      console.error(error)
+    } else {
+      var doc = new DOMParser().parseFromString(res, "text/xml");
+      document.body.innerHTML = res
+      reload_button = document.getElementById('myBtn')
+  
+      reload_button.addEventListener('click', () => {
+        reload()
+      })
+    }
+  })
+  
+  const {getCurrentWindow, globalShortcut} = require('electron').remote;
+  var reload = ()=>{
+    getCurrentWindow().reload()
   }
-})
-
-let reload_button = document.querySelector('#reload')
-const {getCurrentWindow, globalShortcut} = require('electron').remote;
-
-var reload = ()=>{
-  getCurrentWindow().reload()
+  
 }
 
-reload_button.addEventListener('click', () => {
-  reload()
-})

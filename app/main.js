@@ -67,24 +67,23 @@ app.on('will-quit', exitPyProc)
 
 let mainWindow = null
 
-function setMainMenu() {
-  const template = [
-    {
-      label: 'Filter',
+const menuTemplate = [
+  {},
+  {
+      label: 'File',
       submenu: [
-        {
-          label: 'Hello',
-          accelerator: 'Shift+CmdOrCtrl+H',
-          click() {
-              console.log('Oh, hi there!')
+          {
+              label: 'Load API Key'
+          },
+          {
+              label: 'Quit',
+              click(){
+                  app.quit();
+              }
           }
-        }
       ]
-    }
-  ];
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-}
-
+  }
+];
 const createWindow = () => {
   mainWindow = new BrowserWindow({width: 1200, height: 800})
   mainWindow.loadURL(require('url').format({
@@ -97,13 +96,14 @@ const createWindow = () => {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+  return mainWindow
 }
 
 app.on('ready', () => {
-  createWindow()
-  mainWindow = new BrowserWindow();
+  mainWindow = createWindow()
   mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
-  setMainMenu();
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 });
 
 app.on('window-all-closed', () => {
@@ -112,8 +112,3 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
