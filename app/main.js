@@ -110,15 +110,21 @@ app.on('ready', () => {
   mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
-  global.sharedObj = {prop1: "ee"};
+  global.sharedObj = {};
   fs.readFile(`config.json`, (err, jsonString) => {
     if (err) {
         console.log('does not exist')
         global.sharedObj["noKey"] = true;
+        global.sharedObj["noPath"] = true;
+        global.sharedObj['key'] = "";
+        global.sharedObj['path'] = "";
         mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
       } else {
         const customer = JSON.parse(jsonString)
-        console.log(atob(customer["key"]))
+        global.sharedObj['key'] = atob(customer["key"]);
+        global.sharedObj["noKey"] = false;
+        global.sharedObj['key'] = atob(customer["path"]);
+        global.sharedObj["noKey"] = false; 
       }
   })
   

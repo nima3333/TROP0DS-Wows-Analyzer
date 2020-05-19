@@ -16,7 +16,7 @@ document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0"
 
 let reload_button;
 window.onload = function() {
-  client.invoke("echo", "aaa", (error, res) => {
+  client.invoke("echo", getGlobal('sharedObj').key, (error, res) => {
     if(error) {
       console.error(error)
     } else {
@@ -27,7 +27,6 @@ window.onload = function() {
       reload_button.addEventListener('click', () => {
         reload()
       })
-      this.console.dir(getGlobal('sharedObj').prop1)
     }
   })
   

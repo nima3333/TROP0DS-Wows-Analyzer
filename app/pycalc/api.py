@@ -24,10 +24,15 @@ class CalcApi(object):
                         <h1>Nima's Wows Analyser</h1>
                     </div>
                     <div>
-                        <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
-                        <span class="sr-only">Loading...</span>
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <p class="lead">The key is loaded, but no game is detected yet.</p>
+                                <button id="myBtn" type="button" class="btn btn-secondary">Reload</button>
+                                <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
+                                <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         </div>
-                        <button id="myBtn" type="button" class="btn btn-secondary">Secondary</button>
                     </div>"""
 
 
