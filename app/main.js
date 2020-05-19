@@ -76,8 +76,7 @@ const menuTemplate = [
           {
               label: 'Load API Key',
               click(){
-                a = dialog.showOpenDialog({ properties: ['openFile'] })
-                console.dir(a[0])
+                mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
               }
           },
           {
@@ -92,7 +91,7 @@ const menuTemplate = [
 const createWindow = () => {
   mainWindow = new BrowserWindow({width: 1200, height: 800})
   mainWindow.loadURL(require('url').format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'key.html'),
     protocol: 'file:',
     slashes: true
   }))

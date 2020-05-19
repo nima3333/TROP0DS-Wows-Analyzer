@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <div class="jumbotron text-center" style="padding: 0">
+        <h1>Nima's Wows Analyser</h1>
+    </div>
+    <div>
+        <div class="jumbotron">
+            <h4 class="display-4">Entrer votre clé API Wargaming :</h4>
+            <p class="lead">Cette clé est stockée sur votre ordinateur</p>
+            <hr class="my-4">
+            <form>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Key</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" id="inputKey">
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary mb-2">Enregistrer la clé</button>
+                <button id="retour" type="button" class="btn btn-secondary mb-2">Retour</button>
+            </form>
+        </div>          
+    </div>
+  </body>
+  <script src="./renderer2.js"></script>
+</html>
