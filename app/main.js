@@ -123,8 +123,8 @@ app.on('ready', () => {
         const customer = JSON.parse(jsonString)
         global.sharedObj['key'] = (customer["key"]);
         global.sharedObj["noKey"] = false;
-        global.sharedObj['key'] = (customer["path"]);
-        global.sharedObj["noKey"] = false; 
+        global.sharedObj['path'] = (customer["path"]);
+        global.sharedObj["noPath"] = false; 
       }
   })
   
