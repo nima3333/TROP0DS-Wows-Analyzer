@@ -6,6 +6,16 @@ const fs = require('fs');
 let reload_button;
 
 window.onload = function() {
+    dict = {}
+    fs.readFile(`config.json`, (err, jsonString) => {
+        if (err) {
+            console.log('does not exist')
+          } else {
+            const customer = JSON.parse(jsonString)
+            dict = customer          
+        }
+    })
+
     let to_hide = getGlobal('sharedObj').noKey & getGlobal('sharedObj').noPath
 
     reload_button = document.getElementById('retour')
@@ -19,16 +29,23 @@ window.onload = function() {
     key_area = document.getElementById('inputKey')
     key_area.value = getGlobal('sharedObj')['key']
     save_button.addEventListener('click', () => {
-        this.console.dir(key_area.value)
-        dict = {"key" : btoa(key_area.value)}
-        var dictstring = JSON.stringify(dict);
-        fs.writeFile("config.json", dictstring, function(err, result) {
-            if(err) console.log('error', err);
-        });    
-        getGlobal('sharedObj').noKey = true;    
-        getGlobal('sharedObj').key = key_area.value;   
-        if(getGlobal('sharedObj').noPath == false){
-            remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+        if(key_area.value != ""){
+            dict = {"key" : (key_area.value)}
+            var dictstring = JSON.stringify(dict);
+            fs.writeFile("config.json", dictstring, function(err, result) {
+                if(err) console.log('error', err);
+            });    
+            getGlobal('sharedObj').noKey = false;    
+            getGlobal('sharedObj').key = key_area.value;
+            key_area.classList.add("is-valid");
+            key_area.classList.remove("is-invalid");
+            if(getGlobal('sharedObj').noPath == false){
+                remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+            }
+        }
+        else{
+            key_area.classList.add("is-invalid");
+            key_area.classList.remove("is-valid");
         }
     })
 
@@ -36,6 +53,11 @@ window.onload = function() {
     this.console.dir(pathzone)
     pathzone.onchange = function() {
         console.dir(pathzone.value)
+        getGlobal('sharedObj').noPath = false;    
+        getGlobal('sharedObj').path = pathzone.value;
+        if(getGlobal('sharedObj').noKey === false){
+            remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+        }
     };
     pathzone.addEventListener('onchange', () => {
         console.dir(pathzone.value)

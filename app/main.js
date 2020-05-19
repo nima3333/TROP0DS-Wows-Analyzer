@@ -121,9 +121,9 @@ app.on('ready', () => {
         mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
       } else {
         const customer = JSON.parse(jsonString)
-        global.sharedObj['key'] = atob(customer["key"]);
+        global.sharedObj['key'] = (customer["key"]);
         global.sharedObj["noKey"] = false;
-        global.sharedObj['key'] = atob(customer["path"]);
+        global.sharedObj['key'] = (customer["path"]);
         global.sharedObj["noKey"] = false; 
       }
   })
@@ -131,8 +131,6 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
     app.quit()
-  }
 })
 
