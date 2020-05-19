@@ -4,6 +4,8 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const Menu = electron.Menu
 const { dialog } = require('electron')
+const fs = require('fs');
+const atob = require("atob");
 
 /*************************************************************
  * py process
@@ -47,7 +49,7 @@ const createPyProc = () => {
   }
  
   if (pyProc != null) {
-    console.log(pyProc)
+    //console.log(pyProc)
     console.log('child process success on port ' + port)
   }
 }
@@ -90,11 +92,11 @@ const menuTemplate = [
 ];
 const createWindow = () => {
   mainWindow = new BrowserWindow({width: 1200, height: 800})
-  mainWindow.loadURL(require('url').format({
+  /**  mainWindow.loadURL(require('url').format({
     pathname: path.join(__dirname, 'key.html'),
     protocol: 'file:',
     slashes: true
-  }))
+  }))**/
   mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
@@ -108,6 +110,18 @@ app.on('ready', () => {
   mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
+  global.sharedObj = {prop1: "ee"};
+  fs.readFile(`config.json`, (err, jsonString) => {
+    if (err) {
+        console.log('does not exist')
+        global.sharedObj["noKey"] = true;
+        mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
+      } else {
+        const customer = JSON.parse(jsonString)
+        console.log(atob(customer["key"]))
+      }
+  })
+  
 });
 
 app.on('window-all-closed', () => {

@@ -1,4 +1,6 @@
 const zerorpc = require("zerorpc")
+const {getCurrentWindow, globalShortcut, getGlobal} = require('electron').remote;
+
 let client = new zerorpc.Client()
 console.log("renderer is here")
 client.connect("tcp://127.0.0.1:4242")
@@ -25,10 +27,10 @@ window.onload = function() {
       reload_button.addEventListener('click', () => {
         reload()
       })
+      this.console.dir(getGlobal('sharedObj').prop1)
     }
   })
   
-  const {getCurrentWindow, globalShortcut} = require('electron').remote;
   var reload = ()=>{
     getCurrentWindow().reload()
   }
