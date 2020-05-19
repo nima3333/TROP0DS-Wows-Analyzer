@@ -107,7 +107,7 @@ const createWindow = () => {
 
 app.on('ready', () => {
   mainWindow = createWindow()
-  mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
+  mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
   global.sharedObj = {};
@@ -125,6 +125,7 @@ app.on('ready', () => {
         global.sharedObj["noKey"] = false;
         global.sharedObj['path'] = (customer["path"]);
         global.sharedObj["noPath"] = false; 
+        mainWindow.loadURL(path.join('file://', __dirname, 'index.html'));
       }
   })
   

@@ -18,7 +18,7 @@ class CalcApi(object):
                             </div>
                         </div>"""
             files = os.listdir(path)
-            if "testd.json" not in files:
+            if "test.json" not in files:
                 return f"""
                     <div class="jumbotron text-center" style="padding: 0">
                         <h1>Nima's Wows Analyser</h1>
@@ -41,12 +41,15 @@ class CalcApi(object):
             <div class="jumbotron text-center" style="padding: 0">
                 <h1>Nima's Wows Analyser</h1>
             </div>
-                <div class="row">
+            <div class="row">
                 <div class="col-sm-6">
                     {stra[0]}
                 </div>
                 <div class="col-sm-6">
                     {stra[1]}
+                </div>
+                <div style="margin:auto">
+                    <button id="myBtn" type="button" class="btn btn-secondary btn-lg btn-block">Reload</button>
                 </div>
             </div>"""
         except Exception as e:
