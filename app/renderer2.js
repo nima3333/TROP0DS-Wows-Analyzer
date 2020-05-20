@@ -8,7 +8,7 @@ let reload_button;
 window.onload = function() {
 
     let to_hide = getGlobal('sharedObj').noKey & getGlobal('sharedObj').noPath
-
+    
     reload_button = document.getElementById('retour')
     reload_button.disabled = to_hide
 
@@ -36,11 +36,13 @@ window.onload = function() {
 
     pathzone = document.getElementById('path')
     curpath = document.getElementById('curpath')
-    curpath.outerText = "Chemin courant : " + getGlobal('sharedObj')['path']
+    curpath.innerText = "Chemin courant : " + getGlobal('sharedObj')['path']
     pathzone.onchange = function() {
         getGlobal('sharedObj').noPath = false;    
-        getGlobal('sharedObj').path = pathzone.value;
+        getGlobal('sharedObj').path = pathzone.files[0].path;
+        curpath.innerText = "Chemin courant : " + getGlobal('sharedObj')['path']
         save_dict(getGlobal('sharedObj'));
+        console.dir(pathzone)
         if(getGlobal('sharedObj').noKey === false){
             remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
         }

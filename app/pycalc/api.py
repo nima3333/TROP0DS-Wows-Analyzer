@@ -6,7 +6,7 @@ import wows_mm
 
 class CalcApi(object): 
     def echo(self, text):
-        path = "./pycalc"
+        path = text
         try:
             if not os.path.exists(path):
                 return  """<div id="parent">
@@ -54,6 +54,7 @@ class CalcApi(object):
             </div>"""
         except Exception as e:
             return f"error {e}"
+
 def parse_port():
     port = 4242
     try:
