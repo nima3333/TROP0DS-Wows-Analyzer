@@ -8,8 +8,9 @@ import json
 class CalcApi(object): 
     def echo(self, text):
         path = json.loads(text)["path"]
+        api_key = json.loads(text)["key"]
         try:
-            if not os.path.exists(path):
+            if not os.path.exists(path) or not api_key:
                 return  f"""<div class="jumbotron text-center" style="padding: 0">
                                 <h1>Nima's Wows Analyser</h1>
                             </div>
@@ -37,7 +38,7 @@ class CalcApi(object):
                         </div>
                     </div>"""
 
-            stra = wows_mm.get_html()
+            stra = wows_mm.get_html(api_key, path)
             return f"""
                 <div class="jumbotron text-center" style="padding: 0">
                     <h1>Nima's Wows Analyser</h1>

@@ -23,6 +23,7 @@ window.onload = function() {
   client.invoke("echo", dict_to_transfer, (error, res) => {
     if(error) {
       console.error(error)
+      this.console.error("lelel")
     } else {
       var doc = new DOMParser().parseFromString(res, "text/xml");
       document.body.innerHTML = res

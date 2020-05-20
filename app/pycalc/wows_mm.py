@@ -3,8 +3,8 @@ import json
 import re
 import config
 
-def get_html():
-    key = config.api_key
+def get_html(api_key, path):
+    key = api_key
 
     def fct_color(wr):
         if wr < 45:
@@ -14,7 +14,7 @@ def get_html():
         else:
             return "text-white bg-success"
 
-    with open('./pycalc/test.json', 'r') as f:
+    with open(f'{path}/test.json', 'r') as f:
         distros_dict = json.load(f)
 
     players = []
