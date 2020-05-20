@@ -1,5 +1,6 @@
 const zerorpc = require("zerorpc")
 const {getCurrentWindow, globalShortcut, getGlobal} = require('electron').remote;
+const path = require('path')
 
 let client = new zerorpc.Client()
 console.log("renderer is here")
@@ -16,7 +17,10 @@ document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0"
 
 let reload_button;
 window.onload = function() {
-  client.invoke("echo", getGlobal('sharedObj').path, (error, res) => {
+  let true_path = path.join(getGlobal('sharedObj').path, 'replays')
+  let dict_to_transfer = {path: true_path, key: getGlobal('sharedObj').key}
+  dict_to_transfer = JSON.stringify(dict_to_transfer)
+  client.invoke("echo", dict_to_transfer, (error, res) => {
     if(error) {
       console.error(error)
     } else {

@@ -3,17 +3,19 @@ import sys
 import zerorpc
 import os
 import wows_mm
+import json
 
 class CalcApi(object): 
     def echo(self, text):
-        path = text
+        path = json.loads(text)["path"]
         try:
             if not os.path.exists(path):
-                return  """<div class="jumbotron text-center" style="padding: 0">
+                return  f"""<div class="jumbotron text-center" style="padding: 0">
                                 <h1>Nima's Wows Analyser</h1>
                             </div>
                             <div class="alert alert-danger" role="alert" style="text-align: center;">
                                 The wows directory does not exist
+                                {path}
                             </div>
                         </div>"""
 
