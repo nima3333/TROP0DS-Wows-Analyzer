@@ -9,14 +9,14 @@ class CalcApi(object):
         path = text
         try:
             if not os.path.exists(path):
-                return  """<div id="parent">
-                            <div class="jumbotron text-center" style="padding: 0">
+                return  """<div class="jumbotron text-center" style="padding: 0">
                                 <h1>Nima's Wows Analyser</h1>
                             </div>
                             <div class="alert alert-danger" role="alert" style="text-align: center;">
                                 The wows directory does not exist
                             </div>
                         </div>"""
+
             files = os.listdir(path)
             if "test.json" not in files:
                 return f"""
@@ -35,23 +35,22 @@ class CalcApi(object):
                         </div>
                     </div>"""
 
-
             stra = wows_mm.get_html()
             return f"""
-            <div class="jumbotron text-center" style="padding: 0">
-                <h1>Nima's Wows Analyser</h1>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    {stra[0]}
+                <div class="jumbotron text-center" style="padding: 0">
+                    <h1>Nima's Wows Analyser</h1>
                 </div>
-                <div class="col-sm-6">
-                    {stra[1]}
-                </div>
-                <div style="margin:auto">
-                    <button id="myBtn" type="button" class="btn btn-secondary btn-lg btn-block">Reload</button>
-                </div>
-            </div>"""
+                <div class="row">
+                    <div class="col-sm-6">
+                        {stra[0]}
+                    </div>
+                    <div class="col-sm-6">
+                        {stra[1]}
+                    </div>
+                    <div style="margin:auto">
+                        <button id="myBtn" type="button" class="btn btn-secondary btn-lg btn-block">Reload</button>
+                    </div>
+                </div>"""
         except Exception as e:
             return f"error {e}"
 

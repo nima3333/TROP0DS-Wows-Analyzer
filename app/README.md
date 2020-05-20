@@ -1,3 +1,8 @@
+# TODO
+
+- path to replay
+- transmit api key, serialize blablabla
+
 # electron-quick-start
 
 **Clone and run for a quick way to see Electron in action.**
@@ -43,3 +48,4 @@ Note: If you're using Linux Bash for Windows, [see this guide](https://www.howto
 ## License
 
 [CC0 1.0 (Public Domain)](LICENSE.md)
+
