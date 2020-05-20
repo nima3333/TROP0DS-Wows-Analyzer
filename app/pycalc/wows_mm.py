@@ -79,7 +79,7 @@ def get_html(api_key, path):
             ship_caliber = ships_dictionary[player[0]]["default_profile"]["artillery"]["shells"]["AP"]["name"]
             matcher = re.match(r"^(\d{3})", ship_caliber)
             if not matcher:
-                text2 = f"{ship_name}     | AP : unknown"
+                text2 = f"{ship_name}"
             else:
                 actual_caliber = matcher.group(0)
                 if int(actual_caliber) > 380:
