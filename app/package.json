@@ -17,11 +17,10 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.7.6"
+    "@types/node": "^14.0.4",
+    "electron": "^5.0.13"
   },
   "dependencies": {
-    "atob": "^2.1.2",
-    "zeromq": "^5.1.0",
-    "zerorpc": "^0.9.8"
+    "atob": "^2.1.2"
   }
 }

@@ -1,7 +1,8 @@
-const path = require('path')
-const {getCurrentWindow, globalShortcut, getGlobal} = require('electron').remote;
-const { remote } = require('electron')
-const fs = require('fs');
+import { join } from 'path';
+import { remote as _remote } from 'electron';
+const { getCurrentWindow, globalShortcut, getGlobal } = _remote;
+import { remote } from 'electron';
+import { writeFile } from 'fs';
 
 let reload_button;
 
@@ -13,7 +14,7 @@ window.onload = function() {
     reload_button.disabled = to_hide
 
     reload_button.addEventListener('click', () => {
-        remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+        remote.getCurrentWindow().loadURL(join('file://', __dirname, 'index.html'));
     })
 
     save_button = document.getElementById('save')
@@ -26,7 +27,7 @@ window.onload = function() {
             save_dict(getGlobal('sharedObj'));
             make_green(key_area);
             if(getGlobal('sharedObj').noPath == false){
-                remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+                remote.getCurrentWindow().loadURL(join('file://', __dirname, 'index.html'));
             }
         }
         else{
@@ -44,7 +45,7 @@ window.onload = function() {
         save_dict(getGlobal('sharedObj'));
         console.dir(pathzone)
         if(getGlobal('sharedObj').noKey === false){
-            remote.getCurrentWindow().loadURL(path.join('file://', __dirname, 'index.html'));
+            remote.getCurrentWindow().loadURL(join('file://', __dirname, 'index.html'));
         }
     };
 }
@@ -55,11 +56,11 @@ var reload = ()=>{
 
 var save_dict = (dictstring)=>{
     var dictstring = JSON.stringify(dictstring);
-    fs.writeFile("config.json", dictstring, function(err, result) {
+    writeFile("config.json", dictstring, function(err, result) {
         if(err) console.log('error', err);
     });    
 
-    fs.writeFile("config.json", dictstring, function(err, result) {
+    writeFile("config.json", dictstring, function(err, result) {
         if(err) console.log('error', err);
     });
 }
