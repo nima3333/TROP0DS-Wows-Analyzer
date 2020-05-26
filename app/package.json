@@ -4,7 +4,15 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder build --win portable"
+  },
+  "build": {
+    "appId": "yourappid",
+    "win": {
+      "target": "NSIS"
+      }
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -18,7 +26,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "@types/node": "^14.0.4",
-    "electron": "^5.0.13"
+    "electron": "^5.0.13",
+    "electron-builder": "^22.6.1"
   },
   "dependencies": {
     "atob": "^2.1.2"
