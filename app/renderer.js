@@ -7,14 +7,7 @@ const fs = require('fs');
 console.log("renderer is here")
 client.connect("tcp://127.0.0.1:4242")
  */
-document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
-<h1>Nima's Wows Analyser</h1>
-</div>
-<div>
-<div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
-<span class="sr-only">Loading...</span>
-</div>
-</div>`
+
 
 let reload_button;
 
@@ -30,25 +23,41 @@ var reload = ()=>{
   getCurrentWindow().reload()
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
+    <h1>Nima's Wows Analyser</h1>
+    </div>
+    <div>
+    <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
+    <span class="sr-only">Loading...</span>
+    </div>
+    </div>`
+
+})
+
+
 window.onload = function() {
-  //let true_path = path.join(getGlobal('sharedObj').path, 'replays')
-  let true_path = getGlobal('sharedObj').path
-  let dict_to_transfer = {path: true_path, key: getGlobal('sharedObj').key}
-  dict_to_transfer = JSON.stringify(dict_to_transfer)
-  var aa = api()
-  document.body.innerHTML = aa
-/*   client.invoke("echo", dict_to_transfer, (error, res) => {
-    if(error) {
-    } else {
-      var doc = new DOMParser().parseFromString(res, "text/xml");
-      document.body.innerHTML = res
+  document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
+    <h1>Nima's Wows Analyser</h1>
+    </div>
+    <div>
+    <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
+    <span class="sr-only">Loading...</span>
+    </div>
+    </div>`
+    this.setTimeout(function() {
+      console.log('ok... ' + new Date);
+      let true_path = getGlobal('sharedObj').path
+      let dict_to_transfer = {path: true_path, key: getGlobal('sharedObj').key}
+      dict_to_transfer = JSON.stringify(dict_to_transfer)
+      var aa = api()
+      document.body.innerHTML = aa
       reload_button = document.getElementById('myBtn')
-  
+      
       reload_button.addEventListener('click', () => {
         reload()
       })
-    }
-  }) */
+    }, 100);
 }
 
 function api () {
