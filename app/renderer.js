@@ -1,40 +1,19 @@
 const {getCurrentWindow, globalShortcut, getGlobal} = require('electron').remote;
 const path = require('path')
 const fs = require('fs');
-//const zerorpc = require("zerorpc")
-
-/* let client = new zerorpc.Client()
-console.log("renderer is here")
-client.connect("tcp://127.0.0.1:4242")
- */
-
 
 let reload_button;
 
 var request_function = (link) => {
   var result3 = new XMLHttpRequest();
-  result3.open('GET', link, false);  // `false` makes the request synchronous
+  result3.open('GET', link, false);
   result3.send(null);
   return JSON.parse(result3.responseText)
 }
 
-
 var reload = ()=>{
   getCurrentWindow().reload()
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
-    <h1>Nima's Wows Analyser</h1>
-    </div>
-    <div>
-    <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
-    <span class="sr-only">Loading...</span>
-    </div>
-    </div>`
-
-})
-
 
 window.onload = function() {
   document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
@@ -46,9 +25,7 @@ window.onload = function() {
     </div>
     </div>`
     this.setTimeout(function() {
-      console.log('ok... ' + new Date);
-      let true_path = getGlobal('sharedObj').path
-      let dict_to_transfer = {path: true_path, key: getGlobal('sharedObj').key}
+      let dict_to_transfer = {path: getGlobal('sharedObj').path, key: getGlobal('sharedObj').key}
       dict_to_transfer = JSON.stringify(dict_to_transfer)
       var aa = api()
       document.body.innerHTML = aa
@@ -125,7 +102,7 @@ function get_html(key, pathh) {
   }
   var requestable_names = names.join("%2C")
   var result2 = new XMLHttpRequest();
-  result2.open('GET', `https://api.worldofwarships.eu/wows/account/list/?search=${requestable_names}&application_id=${key}&type=exact`, false);  // `false` makes the request synchronous
+  result2.open('GET', `https://api.worldofwarships.eu/wows/account/list/?search=${requestable_names}&application_id=${key}&type=exact`, false);  
   result2.send(null);
   result2 = JSON.parse(result2.responseText)
   result2 = result2["data"]
@@ -136,7 +113,7 @@ function get_html(key, pathh) {
 
   var requestable_ships = shipids.join("%2C")
   var result3 = new XMLHttpRequest();
-  result3.open('GET', `https://api.worldofwarships.eu/wows/encyclopedia/ships/?application_id=${key}&fields=name%2Cdefault_profile.artillery.shells%2Ctype%2Cimages.contour&ship_id=${requestable_ships}`, false);  // `false` makes the request synchronous
+  result3.open('GET', `https://api.worldofwarships.eu/wows/encyclopedia/ships/?application_id=${key}&fields=name%2Cdefault_profile.artillery.shells%2Ctype%2Cimages.contour&ship_id=${requestable_ships}`, false);
   result3.send(null);
   result3 = JSON.parse(result3.responseText)
   var ships_dictionary = result3["data"]

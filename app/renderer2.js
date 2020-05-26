@@ -48,10 +48,6 @@ window.onload = function() {
         }
     };
 }
-  
-var reload = ()=>{
-    getCurrentWindow().reload()
-}
 
 var save_dict = (dictstring)=>{
     var dictstring = JSON.stringify(dictstring);

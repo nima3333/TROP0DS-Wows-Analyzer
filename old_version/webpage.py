@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    path = "./"
+    path = "I:\\Games\\World_of_Warships_EU\\replays\\"
 
     if not os.path.exists(path):
         return f"""
@@ -22,7 +22,7 @@ def hello_world():
             </body>"""
 
     files = os.listdir(path)
-    if "test.json" not in files:
+    if "tempArenaInfo.json" not in files:
         return f"""
             <head>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -39,8 +39,7 @@ def hello_world():
             </div>
             </body>"""
 
-
-    stra = wows_mm.get_html()
+    stra = wows_mm.get_html(path + "tempArenaInfo.json")
     return f"""
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">

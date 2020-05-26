@@ -1,10 +1,9 @@
 import requests
 import json
 import re
-import config
 
-def get_html():
-    key = config.api_key
+def get_html(path):
+    key = "ENTER YOUR KEY"
 
     def fct_color(wr):
         if wr < 45:
@@ -13,8 +12,7 @@ def get_html():
             return "text-white bg-warning"
         else:
             return "text-white bg-success"
-
-    with open('test.json', 'r') as f:
+    with open(path, 'r') as f:
         distros_dict = json.load(f)
 
     players = []
@@ -91,11 +89,16 @@ def get_html():
         if not hidden:
             r = requests.get(f'https://api.worldofwarships.eu/wows/ships/stats/?application_id={key}&account_id={name_dictionary[player[2]]}&ship_id={player[0]}&fields=pvp.xp%2C+pvp.battles%2C+pvp.wins')
             result = json.loads(r.content.decode('utf-8'))
-            raw_specific_data = result["data"][str(name_dictionary[player[2]])][0]["pvp"]
-            wins_s = raw_specific_data["wins"]
-            xp_s = raw_specific_data["xp"]
-            battles_s = raw_specific_data["battles"]
-            text2 += f"<br> WR = {wins_s/battles_s*100 :.2f}% / XP = {xp_s/battles_s :.0f} / Games : {battles_s}"
+            try:
+                raw_specific_data = result["data"][str(name_dictionary[player[2]])][0]["pvp"]
+                #print(result["data"][str(name_dictionary[player[2]])])
+                battles_s = raw_specific_data["battles"]
+                if battles_s != 0:
+                    wins_s = raw_specific_data["wins"]
+                    xp_s = raw_specific_data["xp"]
+                    text2 += f"<br> WR = {wins_s/battles_s*100 :.2f}% / XP = {xp_s/battles_s :.0f} / Games : {battles_s}"
+            except:
+                hidden=True
 
         if hidden or battles_s==0:
             color = "text-white bg-secondary"
@@ -169,3 +172,6 @@ def get_html():
             """
     
     return (str_left, str_right)
+
+if __name__ == "__main__":
+    get_html()
