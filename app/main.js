@@ -30,13 +30,8 @@ const menuTemplate = [
 const createWindow = () => {
   mainWindow = new BrowserWindow({width: 1200, height: 800, webPreferences: {
     nodeIntegration: true
-}})
-  /**  mainWindow.loadURL(require('url').format({
-    pathname: path.join(__dirname, 'key.html'),
-    protocol: 'file:',
-    slashes: true
-  }))**/
-  //mainWindow.webContents.openDevTools()
+  }})
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null

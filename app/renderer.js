@@ -20,7 +20,15 @@ window.onload = function() {
     <h1>Nima's Wows Analyser</h1>
     </div>
     <div>
-    <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
+      <li class="list-group-item list-group-item-success">✅ Vérification du répertoire</li>
+      <li class="list-group-item list-group-item-success">✅ Vérification de la clé</li>
+      <li class="list-group-item list-group-item-success">✅ Recherche de la partie en cours</li>
+      <li class="list-group-item list-group-item-warning">⌛ Chargment des données</li>
+    </ul>
+
+    <div class="spinner-border" role="status" style="display: block; top: 50%; right: 50%; margin: auto; margin-top: 20px">
     <span class="sr-only">Loading...</span>
     </div>
     </div>`
@@ -34,21 +42,54 @@ window.onload = function() {
       reload_button.addEventListener('click', () => {
         reload()
       })
-    }, 100);
+    }, 10);
 }
 
 function api () {
   key = getGlobal('sharedObj').key;
   pathh = getGlobal('sharedObj').path;
-  if(!(fs.existsSync(pathh)) || key===""){
+  if(!(fs.existsSync(pathh))){
     return (`<div class="jumbotron text-center" style="padding: 0">
                   <h1>Nima's Wows Analyser</h1>
               </div>
-              <div class="alert alert-danger" role="alert" style="text-align: center;">
-                  The wows directory does not exist
-              </div>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-danger">❌Le répertoire indiqué est introuvable</li>
+                <li class="list-group-item disabled">Vérification du répertoire</li>
+                <li class="list-group-item disabled">Vérification de la clé</li>
+                <li class="list-group-item disabled">Recherche de la partie en cours</li>
+                <li class="list-group-item disabled">Chargment des données</li>
+              </ul>
               </div>`);
   }
+  if(!(fs.existsSync(path.join(pathh, "replays")))){
+    return (`<div class="jumbotron text-center" style="padding: 0">
+                  <h1>Nima's Wows Analyser</h1>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
+                <li class="list-group-item list-group-item-danger">❌ Le répertoire indiqué n'est pas celui du jeu</li>
+                <li class="list-group-item disabled">Vérification de la clé</li>
+                <li class="list-group-item disabled">Recherche de la partie en cours</li>
+                <li class="list-group-item disabled">Chargment des données</li>
+              </ul>
+              </div>`);
+  }
+  pathh = path.join(pathh, "replays")
+  var test = request_function(`https://api.worldoftanks.eu/wgn/servers/info/?application_id=${key}`)
+  if(test["status"] !== "ok" || key===""){
+    return (`<div class="jumbotron text-center" style="padding: 0">
+    <h1>Nima's Wows Analyser</h1>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
+      <li class="list-group-item list-group-item-success">✅ Vérification du répertoire</li>
+      <li class="list-group-item list-group-item-danger">❌ La clé indiquée n'est pas valide</li>
+      <li class="list-group-item disabled">Recherche de la partie en cours</li>
+      <li class="list-group-item disabled">Chargment des données</li>
+    </ul>
+    </div>`);
+  }
+
   if(!fs.existsSync(path.join(pathh, "tempArenaInfo.json"))) {
     return(`<div class=\"jumbotron text-center\" style="padding: 0">
                   <h1>Nima's Wows Analyser</h1>
@@ -56,31 +97,37 @@ function api () {
               <div>
                   <div class="jumbotron jumbotron-fluid">
                       <div class="container">
-                          <p class="lead">The key is loaded, but no game is detected yet.</p>
-                          <button id="myBtn" type="button" class="btn btn-secondary">Reload</button>
-                          <div class="spinner-border" role="status" style="display: block; position: fixed; z-index: 1031; top: 50%; right: 50%; margin-top: -..px; margin-right: -..px;">
-                          <span class="sr-only">Loading...</span>
+                          <ul class="list-group">
+                            <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
+                            <li class="list-group-item list-group-item-success">✅ Vérification du répertoire</li>
+                            <li class="list-group-item list-group-item-success">✅ Vérification de la clé</li>
+                            <li class="list-group-item list-group-item-warning">⌛ Recherche de la partie en cours</li>
+                            <li class="list-group-item disabled">Chargment des données</li>
+                          </ul>
+                          <button id="myBtn" type="button" class="btn btn-secondary" style="margin: auto; display:block; margin-top: 20px; margin-bottom: 20px">Reload</button>
                           </div>
+                          <div class="spinner-border" role="status" style="display: block; top: 50%; right: 50%; margin: auto">
+                          <span class="sr-only">Loading...</span>
+
                       </div>
                   </div>
               </div>`);
   }
   var stra = get_html(key, pathh)
-    console.dir(stra)
-    return `<div class="jumbotron text-center" style="padding: 0">
-                      <h1>Nima's Wows Analyser</h1>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-6">
-                          ${stra[0]}
-                      </div>
-                      <div class="col-sm-6">
-                          ${stra[1]}
-                      </div>
-                      <div style="margin:auto">
-                          <button id="myBtn" type="button" class="btn btn-secondary btn-lg btn-block">Reload</button>
-                      </div>
-                  </div>`
+  return `<div class="jumbotron text-center" style="padding: 0">
+                    <h1>Nima's Wows Analyser</h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        ${stra[0]}
+                    </div>
+                    <div class="col-sm-6">
+                        ${stra[1]}
+                    </div>
+                    <div style="margin:auto">
+                        <button id="myBtn" type="button" class="btn btn-secondary btn-lg btn-block">Reload</button>
+                    </div>
+                </div>`
 
 
 }
