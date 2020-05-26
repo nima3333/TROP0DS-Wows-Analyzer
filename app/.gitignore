@@ -1,8 +1,0 @@
-node_modules/*
-!node_modules/zerorpc/
-node_modules/zerorpc/*
-!node_modules/zerorpc/lib
-node_modules/zerorpc/lib/*
-!node_modules/zerorpc/lib/channel.js
-config.json
-dist/

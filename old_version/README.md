@@ -1,8 +1,8 @@
-# Nima's Wows Analyser
+# Wows Analyser
 
 This application aims to provide live games statistics (players stats in particular) for World of Warships.
 
-It's a local webserver, so you just need python and a browser to run it.
+It's a local webserver (Flask), so you just need python and a browser to run it.
 
 ## Installation
 
@@ -11,7 +11,7 @@ You have first to install Python (procedure not explained here).
 ```
 pip3 install -r requirements.txt
 ```
-TODO : complete (config.py, ...)
+You have to enter your Wargaming API key in the `wows_mm.py` (line 6)
 
 ## Usage
 

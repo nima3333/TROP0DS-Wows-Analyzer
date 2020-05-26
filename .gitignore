@@ -1,3 +1,6 @@
+node_modules/*
+config.json
+dist/
 *.pyc
 config.py
 __pycache__/
