@@ -1,8 +1,7 @@
-import { join } from 'path';
-import { remote as _remote } from 'electron';
-const { getCurrentWindow, globalShortcut, getGlobal } = _remote;
-import { remote } from 'electron';
-import { writeFile } from 'fs';
+const { getCurrentWindow, globalShortcut, getGlobal } = require('electron').remote;
+const { remote } = require('electron');
+const { writeFile } = require('fs');
+const {join} = require('path')
 
 let reload_button;
 
