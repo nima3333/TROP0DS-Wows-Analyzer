@@ -72,7 +72,7 @@ function api () {
               </div>
               </div>`);
   }
-  if(!fs.existsSync(path.join(pathh, "test.json"))) {
+  if(!fs.existsSync(path.join(pathh, "tempArenaInfo.json"))) {
     return(`<div class=\"jumbotron text-center\" style="padding: 0">
                   <h1>Nima's Wows Analyser</h1>
               </div>
@@ -109,7 +109,7 @@ function api () {
 }
 
 function get_html(key, pathh) {
-  var distro_dict = fs.readFileSync(path.join(pathh, "test.json"))
+  var distro_dict = fs.readFileSync(path.join(pathh, "tempArenaInfo.json"))
   json_dict = JSON.parse(distro_dict)
   var players = []
   var names = []
@@ -180,11 +180,16 @@ function get_html(key, pathh) {
     //details about the ship
     if(!hidden){
       var result = request_function(`https://api.worldofwarships.eu/wows/ships/stats/?application_id=${key}&account_id=${name_dictionary[player[2]]}&ship_id=${player[0]}&fields=pvp.xp%2C+pvp.battles%2C+pvp.wins`)
-      var raw_specific_data = result["data"][name_dictionary[player[2]]][0]["pvp"]
-      var wins_s = raw_specific_data["wins"]
-      var xp_s = raw_specific_data["xp"]
-      var battles_s = raw_specific_data["battles"]
-      text2 += `<br> Wr=${(wins_s/battles_s*100).toFixed(2)}% | XP=${(xp_s/battles_s).toFixed(2)} | NbB=${battles_s}`
+      try{
+        var raw_specific_data = result["data"][name_dictionary[player[2]]][0]["pvp"]
+        var battles_s = raw_specific_data["battles"]
+        var wins_s = raw_specific_data["wins"]
+        var xp_s = raw_specific_data["xp"]
+        text2 += `<br> Wr=${(wins_s/battles_s*100).toFixed(2)}% | XP=${(xp_s/battles_s).toFixed(2)} | NbB=${battles_s}`  
+      }
+      catch (error) {
+        hidden=true
+      }
     }
     var color
     if (hidden || battles_s==0){
