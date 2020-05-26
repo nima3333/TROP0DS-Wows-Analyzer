@@ -1,4 +1,4 @@
-const {getCurrentWindow, globalShortcut, getGlobal} = require('electron').remote;
+const {getCurrentWindow, getGlobal} = require('electron').remote;
 const path = require('path')
 const fs = require('fs');
 
@@ -17,7 +17,7 @@ var reload = ()=>{
 
 window.onload = function() {
   document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0">
-    <h1>Nima's Wows Analyser</h1>
+    <h1>sTRategic bOat Pr0bing and Dodging System</h1>
     </div>
     <div>
     <ul class="list-group">
@@ -50,7 +50,7 @@ function api () {
   pathh = getGlobal('sharedObj').path;
   if(!(fs.existsSync(pathh))){
     return (`<div class="jumbotron text-center" style="padding: 0">
-                  <h1>Nima's Wows Analyser</h1>
+                  <h1>sTRategic bOat Pr0bing and Dodging System</h1>
               </div>
               <ul class="list-group">
                 <li class="list-group-item list-group-item-danger">❌Le répertoire indiqué est introuvable</li>
@@ -63,7 +63,7 @@ function api () {
   }
   if(!(fs.existsSync(path.join(pathh, "replays")))){
     return (`<div class="jumbotron text-center" style="padding: 0">
-                  <h1>Nima's Wows Analyser</h1>
+                  <h1>sTRategic bOat Pr0bing and Dodging System</h1>
               </div>
               <ul class="list-group">
                 <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
@@ -78,7 +78,7 @@ function api () {
   var test = request_function(`https://api.worldoftanks.eu/wgn/servers/info/?application_id=${key}`)
   if(test["status"] !== "ok" || key===""){
     return (`<div class="jumbotron text-center" style="padding: 0">
-    <h1>Nima's Wows Analyser</h1>
+    <h1>sTRategic bOat Pr0bing and Dodging System</h1>
     </div>
     <ul class="list-group">
       <li class="list-group-item list-group-item-success">✅ Recherche du répertoire</li>
@@ -92,7 +92,7 @@ function api () {
 
   if(!fs.existsSync(path.join(pathh, "tempArenaInfo.json"))) {
     return(`<div class=\"jumbotron text-center\" style="padding: 0">
-                  <h1>Nima's Wows Analyser</h1>
+                  <h1>sTRategic bOat Pr0bing and Dodging System</h1>
               </div>
               <div>
                   <div class="jumbotron jumbotron-fluid">
@@ -115,7 +115,7 @@ function api () {
   }
   var stra = get_html(key, pathh)
   return `<div class="jumbotron text-center" style="padding: 0">
-                    <h1>Nima's Wows Analyser</h1>
+                    <h1>sTRategic bOat Pr0bing and Dodging System</h1>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">

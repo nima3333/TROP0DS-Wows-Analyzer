@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "TROP0DS",
   "version": "1.0.0",
-  "description": "A WoWs game analyser",
+  "description": "sTRategic bOat Pr0bing and Dodging System",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

@@ -3,7 +3,6 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const Menu = electron.Menu
-const { dialog } = require('electron')
 const fs = require('fs');
 
 let mainWindow = null
@@ -28,9 +27,14 @@ const menuTemplate = [
   }
 ];
 const createWindow = () => {
-  mainWindow = new BrowserWindow({width: 1200, height: 800, webPreferences: {
-    nodeIntegration: true
-  }})
+  mainWindow = new BrowserWindow(
+    {width: 1200, 
+    height: 800,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    title: "TROP0DS"
+  })
   mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {

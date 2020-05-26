@@ -1,4 +1,4 @@
-const { getCurrentWindow, globalShortcut, getGlobal } = require('electron').remote;
+const { getGlobal } = require('electron').remote;
 const { remote } = require('electron');
 const { writeFile } = require('fs');
 const {join} = require('path')
