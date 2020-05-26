@@ -19,8 +19,10 @@ document.body.innerHTML = `<div class="jumbotron text-center" style="padding: 0"
 let reload_button;
 
 var request_function = (link) => {
-  var res = request('GET', link);
-  return(res.getBody());
+  var result3 = new XMLHttpRequest();
+  result3.open('GET', link, false);  // `false` makes the request synchronous
+  result3.send(null);
+  return JSON.parse(result3.responseText)
 }
 
 
@@ -129,7 +131,6 @@ function get_html(key, pathh) {
   result3.send(null);
   result3 = JSON.parse(result3.responseText)
   var ships_dictionary = result3["data"]
-  console.dir(ships_dictionary)
   for (const player of players) {
     player.push(ships_dictionary[player[0]]["type"])
   }
@@ -146,9 +147,113 @@ function get_html(key, pathh) {
   var right = []
 
   for (const player of players) {
-    var hidden = False
+    var hidden = false
+    //General data about the player
+    var result = request_function(`https://api.worldofwarships.eu/wows/account/statsbydate/?application_id=${key}&account_id=${name_dictionary[player[2]]}&fields=pvp.xp%2C+pvp.battles%2C+pvp.wins`)
+    var text = ""
+    if (result["meta"]["hidden"]){
+      text = `${player[2]} <br> Hidden`
+      hidden = true
+    }        
+    else{
+      var raw_general_data = result["data"][name_dictionary[player[2]]]["pvp"]
+      raw_general_data = raw_general_data[Object.keys(raw_general_data)[0]]
+      var wins = raw_general_data["wins"]
+      var xp = raw_general_data["xp"]
+      var battles = raw_general_data["battles"]
+      text = `${player[2]}     <br>  Wr=${(wins/battles*100).toFixed(2)}% | XP=${(xp/battles).toFixed(2)} | NbB=${battles}`
+    }
+
+    //shipname & artillery
+    ship_name = ships_dictionary[player[0]]["name"]
+    var text2 = ship_name
+
+    //details about the ship
+    if(!hidden){
+      var result = request_function(`https://api.worldofwarships.eu/wows/ships/stats/?application_id=${key}&account_id=${name_dictionary[player[2]]}&ship_id=${player[0]}&fields=pvp.xp%2C+pvp.battles%2C+pvp.wins`)
+      var raw_specific_data = result["data"][name_dictionary[player[2]]][0]["pvp"]
+      var wins_s = raw_specific_data["wins"]
+      var xp_s = raw_specific_data["xp"]
+      var battles_s = raw_specific_data["battles"]
+      text2 += `<br> Wr=${(wins_s/battles_s*100).toFixed(2)}% | XP=${(xp_s/battles_s).toFixed(2)} | NbB=${battles_s}`
+    }
+    var color
+    if (hidden || battles_s==0){
+      color = "text-white bg-secondary"
+    }
+    else{
+      var total_bat = battles_s + battles
+      var mean_wr = (battles * (wins/battles*100) + battles_s * (wins_s/battles_s*100))/total_bat
+      color = fct_color(mean_wr)
+    }
+    //a, b compteurs
+    if( player[1]==0){
+      i=13
+      left.push([text, text2, ships_dictionary[player[0]]["images"]["contour"], "text-white bg-info"])
+    }
+    else if (player[1]==1){
+      i=a
+      a+=1
+      left.push([text, text2, ships_dictionary[player[0]]["images"]["contour"], color])
+    }
+    else if (player[1]==2){
+      i=b
+      b+=1
+      right.push([text, text2, ships_dictionary[player[0]]["images"]["contour"], color])
+    }
+  }
+  var str_left = ""
+  for (const l of left){
+    str_left += `
+    <div class="row no-gutters">
+    <div class="col-md-2" style="padding-top: 10px; padding-bottom: 10px">
+        <img src='${l[2]}' class="card-img" alt="..." style="width:150px; height: auto; padding-right: 20px">
+    </div>
+    <div class="col-md-9" style="position: relative">
+        <div class="card ${l[3]}" style="width: inherit; height:auto;">
+        <div class="card-body" style="padding-top:0px; padding-bottom:0px">
+            <div class="row card-text" style="padding: 0px; ">
+                <div class="col" style="padding: 0px">
+                    ${l[0]}
+                </div>
+                <div class="col" style="padding: 0px">
+                    ${l[1]}
+                </div>
+            </div>
+        </div> 
+        </div>
+    </div>
+    </div>
+    `
   }
 
+  var str_right = ""
+  for (const l of right){
+    str_right +=  `
+          <div class="row no-gutters">
+          <div class="col-md-9" style="position: relative">
+              <div class="card ${l[3]}" style="width: inherit; height:auto;">
+              <div class="card-body" style="padding-top:0px; padding-bottom:0px">
+                  <div class="row card-text" style="padding: 0px; ">
+                      <div class="col" style="padding: 0px">
+                          ${l[0]}
+                      </div>
+                      <div class="col" style="padding: 0px">
+                          ${l[1]}
+                      </div>
+                  </div>
+              </div> 
+              </div>
+          </div>
+          <div class="col-md-2" style="padding-top: 10px; padding-bottom: 10px">
+              <img src='${l[2]}' class="card-img" alt="..." style="width:150px; height: auto; padding-left: 20px">
+          </div>
+
+          </div>
+          `
+  }
+
+  return [str_left, str_right]
 }
 
 var fct_color = (wr) =>{
