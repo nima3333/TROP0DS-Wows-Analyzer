@@ -9,16 +9,16 @@ let mainWindow = null
 
 const menuTemplate = [
   {
-      label: 'File',
+      label: 'Fichier',
       submenu: [
           {
-              label: 'Load API Key',
+              label: 'Paramètres',
               click(){
                 mainWindow.loadURL(path.join('file://', __dirname, 'key.html'));
               }
           },
           {
-              label: 'Quit',
+              label: 'Quitter',
               click(){
                   app.quit();
               }
@@ -33,9 +33,9 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true
     },
-    title: "TROP0DS"
+    title: "TROPODS"
   })
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null
