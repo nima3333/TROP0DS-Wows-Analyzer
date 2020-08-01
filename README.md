@@ -3,5 +3,9 @@
 TODO:
 - Readme ;)
 - Mettre sous forme d'overlay sur wows (légal ?)
-- Projet randomShip
-- Fusioner avec le projet randomShip
+- Projet NTDS
+- Fusioner avec le projet NTDS
+
+TODO NTDS:
+- Oversampling
+- Build neural network
