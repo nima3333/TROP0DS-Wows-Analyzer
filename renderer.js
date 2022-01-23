@@ -165,7 +165,9 @@ function get_html(key, pathh) {
   result3 = JSON.parse(result3.responseText)
   var ships_dictionary = result3["data"]
   for (const player of players) {
-    player.push(ships_dictionary[player[0]]["type"])
+    if (ships_dictionary[player[0]]) {
+      player.push(ships_dictionary[player[0]]["type"])
+    }
   }
   players.sort(function(a, b) {
     if(a[3] > b[3]) return 1;
@@ -196,7 +198,9 @@ function get_html(key, pathh) {
       var battles = raw_general_data["battles"]
       text = `${player[2]}     <br>  Wr=${(wins/battles*100).toFixed(2)}% | XP=${(xp/battles).toFixed(2)} | NbB=${battles}`
     }
-
+    if(!ships_dictionary[player[0]]){
+      continue;
+    }
     //shipname & artillery
     ship_name = ships_dictionary[player[0]]["name"]
     var text2 = ship_name

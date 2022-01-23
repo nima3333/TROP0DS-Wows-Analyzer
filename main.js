@@ -35,7 +35,7 @@ const createWindow = () => {
     },
     title: "TROPODS"
   })
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null
